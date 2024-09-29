@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { SERVER_BASE_URL } from '../utils/constants'
 
 
 function Edit() {
@@ -12,11 +13,11 @@ function Edit() {
     const {id} = useParams()
 
     useEffect(() => {
-        axios.get('http://localhost:8081/employees/' + id)
+        axios.get( `${SERVER_BASE_URL}/employees/` + id)
         .then(
             res => {
-                // setData(res.data)
-                const data = res.data[0]
+                console.log('data fetched,id=' + id,res)
+                const data = res.data
                 setFirstName(data.firstName)
                 setLastName(data.lastName)
                 setEmail(data.email)
@@ -30,7 +31,7 @@ function Edit() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(firstName, lastName, email, phone)
-        axios.put('http://localhost:8081/employees/' + id, { firstName, lastName, email, phone })
+        axios.put(`${SERVER_BASE_URL}/employees/` + id, { firstName, lastName, email, phone })
             .then(res => {
                 console.log(res)
                 navigate('/')
