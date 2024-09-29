@@ -13,6 +13,7 @@ EmployeeRoute.get('/', async (req, res) => {
         res.json(employees)
     } catch (error) {
         console.log('Error while fetching all employees', error)
+        res.status(500).json({ error: error.message });
     }
 })
 
@@ -21,10 +22,11 @@ EmployeeRoute.get('/:id', async (req, res) => {
     const id = req.params.id
     try {
         const employee = await EmployeeModel.findByPk(id)
-        console.log("get employee by id=" + id, employee.dataValues)
+        console.log("get employee by id=" + id, employee? employee.dataValues : '')
         res.json(employee.dataValues);
     } catch (error) {
         console.log(`Error while fetching employee by id=${id}`, error)
+        res.status(500).json({ error: error.message });
     }
 })
 
@@ -37,6 +39,7 @@ EmployeeRoute.post('/', async (req, res) => {
         res.status(201).json({ message: 'Employee created successfully' });
     } catch (error) {
         console.log('Error while creating employee', error)
+        res.status(500).json({ error: error.message });
     }
 })
 
@@ -54,6 +57,7 @@ EmployeeRoute.put('/:id', async (req, res) => {
         res.status(200).json({ message: 'Employee updated successfully' });
     } catch (error) {
         console.log(`Error while updating employee by id=${id}`, error)
+        res.status(500).json({ error: error.message });
     }
 })
 
@@ -71,6 +75,7 @@ EmployeeRoute.delete('/:id', async (req, res) => {
         res.status(200).json({ message: 'Employee deleted successfully' });
     } catch (error) {
         console.log(`Error while deleting employee by id=${id}`, error)
+        res.status(500).json({ error: error.message });
     }
 })
 
