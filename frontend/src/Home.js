@@ -1,13 +1,14 @@
 import React, { useEffect,useState } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { SERVER_BASE_URL } from './utils/constants'
 
 
 function Home() {
 
     const [data, setData] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:8081/employees')
+        axios.get(`${SERVER_BASE_URL}/employees`)
         .then(
             res => {
                 setData(res.data)
@@ -18,11 +19,12 @@ function Home() {
     }, [])
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8081/employees/` + id)
+        axios.delete(`${SERVER_BASE_URL}/employees/` + id)
         .then(
             res => {
-                setData(data.filter(item => item.id !== id))
-                alert('Employee deleted successfully')
+                // setData(data.filter(item => item.id !== id))
+                // alert('Employee deleted successfully')
+                window.location.reload()
             }
         )
         .catch(err => console.log("Error while deleting data: ", err))

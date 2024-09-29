@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SERVER_BASE_URL } from '../utils/constants'
 
 function Create() {
     const [firstName, setFirstName] = useState('')
@@ -12,7 +13,7 @@ function Create() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(firstName, lastName, email, phone)
-        axios.post('http://localhost:8081/employees', { firstName, lastName, email, phone })
+        axios.post(`${SERVER_BASE_URL}/employees`, { firstName, lastName, email, phone })
             .then(res => {
                 console.log(res)
                 navigate('/')
