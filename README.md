@@ -34,9 +34,8 @@ npm start
 * [Express.js](https://expressjs.com/) - Node.js Web application framework
 * [React.js](https://reactjs.org/) - Frontend framework
 * [Node.js](https://nodejs.org/en/) - Backend runtime environment
+* [Sequelize](https://sequelize.org) - a modern TypeScript and Node.js ORM
 
 ## To Do
 
-* Remove hard code
-* Optimize the database operations
 * Add unit tests
